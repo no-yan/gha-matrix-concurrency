@@ -23,6 +23,6 @@ jobs:
     needs: [get-targets]
     runs-on: ubuntu-latest
     strategy: ${{fromJson(needs.get-targets.outputs.targets)}}
-    concurrency: package-${{matrix.key1}}
+    concurrency: package-${{matrix.key}}
     steps:
-      - run: echo ${{matrix.key1}}
+      - run: echo ${{matrix.key}}
