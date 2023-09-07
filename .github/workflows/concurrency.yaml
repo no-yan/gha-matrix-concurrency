@@ -26,6 +26,6 @@ jobs:
     strategy:
       matrix:
         app: ${{fromJson(needs.get-targets.outputs.targets)}}
-    # concurrency: package-${{matrix}}
+    concurrency: package
     steps:
       - run: echo ${{fromJson(needs.get-targets.outputs.targets)}}
