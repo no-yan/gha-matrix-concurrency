@@ -1,0 +1,26 @@
+name: dynamic matrix
+
+on: [push]
+
+jobs:
+  set-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      something: ${{ steps.set-matrix.outputs.value }}
+    steps:
+      - name: make values
+        id: set-matrix
+        run: |
+          echo '["hoge","fuga"]' | jq -c
+          list=$(echo '["hoge","fuga"]' | jq -c)
+          echo "value=${list}" >> $GITHUB_OUTPUT
+
+  execute:
+    needs: set-matrix
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        hoge: ${{fromJson(needs.set-matrix.outputs.something)}}
+    steps:
+      - run: echo ${{ matrix.hoge }}

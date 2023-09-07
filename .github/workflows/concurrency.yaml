@@ -17,9 +17,7 @@ jobs:
           cat ./setting.json
           key="$(cat ./setting.json | jq -c .key)"
           # 特殊文字をエスケープ
-          escaped=$(printf '%s' "$key" | python -c 'import json,sys; print(json.dumps(sys.stdin.read()))')
-          echo $escaped
-          echo "key=$escaped" >> $GITHUB_OUTPUT
+          echo "key=$key" >> $GITHUB_OUTPUT
         id: print
 
   do-each:
