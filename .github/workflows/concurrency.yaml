@@ -1,0 +1,27 @@
+name: workflow name
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+jobs:
+  get-targets:
+    runs-on: ubuntu-latest
+    outputs:
+      targets: ${{ steps.print.outputs.affected }}
+    steps:
+      - uses: actions/checkout
+      - run: |
+          json_value="{\"key\": \"value\"}"
+          echo json_value >> "$GITHUB_OUTPUT"
+        id: print
+
+  do-each:
+    needs: [get-targets]
+    runs-on: ubuntu-latest
+    strategy: ${{fromJson(needs.get-targets.outputs.targets)}}
+    concurrency: package-${{matrix.key}}
+    steps:
+      - run: echo ${{matrix.key}}
