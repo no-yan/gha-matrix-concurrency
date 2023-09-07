@@ -15,7 +15,6 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           content=`cat ./setting.json`
-          //複数行の場合は特殊文字をパース可能な文字に置き換える
           content="${content//'%'/'%25'}"
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
