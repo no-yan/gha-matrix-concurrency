@@ -22,7 +22,7 @@ jobs:
   do-each:
     needs: [get-targets]
     runs-on: ubuntu-latest
-    # strategy: ${{fromJson(needs.get-targets.outputs.targets)}}
+    strategy: ${{fromJson(needs.get-targets.outputs.targets)}}
     # concurrency: package-${{matrix}}
     steps:
       - run: echo ${{fromJson(needs.get-targets.outputs.targets)}}
