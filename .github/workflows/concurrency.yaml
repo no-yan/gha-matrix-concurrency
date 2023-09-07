@@ -12,7 +12,7 @@ jobs:
     outputs:
       targets: ${{ steps.print.outputs.affected }}
     steps:
-      - uses: actions/checkout
+      - uses: actions/checkout@v4
       - run: |
           json_value="{\"key\": \"value\"}"
           echo json_value >> "$GITHUB_OUTPUT"
