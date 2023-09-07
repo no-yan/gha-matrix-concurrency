@@ -14,12 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          content=`cat ./setting.json`
-          content="${content//'%'/'%25'}"
-          content="${content//$'\n'/'%0A'}"
-          content="${content//$'\r'/'%0D'}"
-          echo $content
-          echo "key=$content"  >> "$GITHUB_OUTPUT"
+          cat ./setting.json
+          key=$(cat ./setting.json | jq -r .title)
+          echo "KEY=${key}" >> $GITHUB_ENV"
         id: print
 
   do-each:
