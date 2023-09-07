@@ -16,7 +16,7 @@ jobs:
       - run: |
           cat ./setting.json
           key=$(cat ./setting.json | jq -r .title)
-          echo "KEY=${key}" >> $GITHUB_ENV"
+          echo "KEY=${key}" >> "$GITHUB_ENV"
         id: print
 
   do-each:
