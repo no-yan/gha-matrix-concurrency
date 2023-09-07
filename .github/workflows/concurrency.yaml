@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           cat ./setting.json
-          key=$(cat ./setting.json)
+          key=$(cat ./setting.json | jq -r .key)
           echo "KEY=${key}" >> $GITHUB_OUTPUT
         id: print
 
@@ -23,6 +23,6 @@ jobs:
     needs: [get-targets]
     runs-on: ubuntu-latest
     # strategy: ${{fromJson(needs.get-targets.outputs.targets)}}
-    # concurrency: package-${{matrix.key}}
+    # concurrency: package-${{matrix}}
     steps:
       - run: echo ${{fromJson(needs.get-targets.outputs.targets)}}
