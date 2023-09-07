@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           cat ./setting.json
-          key=$(cat ./setting.json | jq -r .key)
+          key=$(cat ./setting.json)
           echo "KEY=${key}" >> $GITHUB_OUTPUT
         id: print
 
