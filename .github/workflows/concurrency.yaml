@@ -1,4 +1,4 @@
-name: workflow name
+name: Concurrency for Dynamic Matrix
 
 on:
   push:
@@ -29,3 +29,5 @@ jobs:
     concurrency: package
     steps:
       - run: echo ${{fromJson(needs.get-targets.outputs.targets)}}
+      - run: |
+          sleep 120
